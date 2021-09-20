@@ -41,15 +41,15 @@ exports.findAll = (req, res) => {
 
 // Find a single Student with a StudentId
 exports.findOne = (req, res) => {
-  Student.findById(req.params.studentId, (err, data) => {
+  Student.findById(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Student with id ${req.params.studentId}.`,
+          message: `Not found Student with id ${req.params.id}.`,
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving Student with id " + req.params.studentId,
+          message: "Error retrieving Student with id " + req.params.id,
         });
       }
     } else res.send(data);
