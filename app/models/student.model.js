@@ -54,8 +54,8 @@ Student.getAll = (result) => {
 
 Student.updateById = (id, Student, result) => {
   sql.query(
-    "UPDATE Students SET email = ?, name = ?, active = ? WHERE id = ?",
-    [Student.email, Student.name, Student.active, id],
+    "UPDATE Students SET name = ?, studentid = ? WHERE id = ?",
+    [Student.name, Student.studentid, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
