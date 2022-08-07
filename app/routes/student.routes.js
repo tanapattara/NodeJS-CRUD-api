@@ -1,21 +1,74 @@
-module.exports = (app) => {
-  const student = require("../controllers/student.controller.js");
+const express = require("express");
+const router = express.Router();
+const studentController = require("../controllers/student.controller.js");
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    student:
+ *      type: object
+ *      required:
+ *        - studentid
+ *        - name
+ *        - major
+ *      properties:
+ *        id:
+ *          type: int
+ *          description: auto-generated id of student
+ *        studentid:
+ *          type: string
+ *          description: string of student - id
+ *        name:
+ *          type: string
+ *          description: fullname of student
+ *        major:
+ *          type: string
+ *          description: name of major
+ *      example:
+ *        id: 1
+ *        studentid: XXXXXXXXX-X
+ *        name: Mickey Mouse
+ *        major: Computer and Information Science
+ */
 
-  // Create a new student
-  app.post("/api/student", student.create);
+/**
+ * @swagger
+ * tags:
+ *   name: Student
+ *   description: The student managing API
+ */
 
-  // Retrieve all student
-  app.get("/api/student", student.findAll);
+/**
+ * @swagger
+ * /student:
+ *   get:
+ *     summary: Returns the list of all student
+ *     tags: [Student]
+ *     responses:
+ *       200:
+ *         description: The list of the student
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/student'
+ */
 
-  // Retrieve a single student with studentId
-  app.get("/api/student/:id", student.findOne);
+router.get("/", (req, res) => {
+  studentController.findAll(req, res);
+});
+router.get("/:id", (req, res) => {
+  studentController.findOne(req, res);
+});
+router.post("/", (req, res) => {
+  studentController.create(req, res);
+});
+router.put("/:id", (req, res) => {
+  studentController.update(req, res);
+});
+router.delete("/:id", (req, res) => {
+  studentController.delete;
+});
 
-  // Update a student with studentId
-  app.put("/api/student/:studentId", student.update);
-
-  // Delete a student with studentId
-  app.delete("/api/student/:studentId", student.delete);
-
-  // Create a new student
-  app.delete("/api/student", student.deleteAll);
-};
+module.exports = router;
