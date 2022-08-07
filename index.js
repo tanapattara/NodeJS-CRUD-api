@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const studentRoute = require("./app/routes/student.routes");
@@ -10,7 +11,7 @@ const app = express();
 const corsOptions = {
   origin: "http://localhost:3000",
 };
-const options = {
+const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
@@ -27,7 +28,7 @@ const options = {
   apis: ["./app/routes/*.js"],
 };
 
-const specs = swaggerJsDoc(options);
+const specs = swaggerJsDoc(swaggerOptions);
 
 // Setup server port
 const port = process.env.PORT || 4000;

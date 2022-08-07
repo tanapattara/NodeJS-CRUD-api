@@ -68,7 +68,7 @@ router.put("/:id", (req, res) => {
   studentController.update(req, res);
 });
 router.delete("/:id", (req, res) => {
-  studentController.delete;
+  studentController.delete(req, res);
 });
 
 module.exports = router;
